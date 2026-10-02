@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Quintas da Mantiqueira · Lançamento</title>
+<meta name="description" content="Cronograma de peças do lançamento Quintas da Mantiqueira — Barbacena. Por Megali Hub.">
+<link rel="icon" href="/megali-icone.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Expletus+Sans:wght@500;600;700&family=Raleway:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#FAFAFA; --surface:#FFFFFF; --ink:#0F0F10; --ink-2:#3A3A3F; --muted:#7A7A82;
+    --line:#E7E7EA; --line-2:#F1F1F3; --hover:#F5F5F7;
+    --purple:#6D15FF; --purple-2:#8703E7; --purple-3:#9700C9; --purple-soft:#F3ECFF;
+    --pendente:#C2410C; --pendente-bg:#FFF4EC; --pendente-line:#FBD3B8;
+    --producao:#6D15FF; --producao-bg:#F3ECFF; --producao-line:#D9C4FF;
+    --concluida:#15803D; --concluida-bg:#EDF8F1; --concluida-line:#BFE5CC;
+    --impressao:#0E7490; --impressao-bg:#ECF8FB; --impressao-line:#B6E3EE;
+    --radius:14px; --shadow:0 1px 2px rgba(15,15,16,.04),0 4px 16px rgba(15,15,16,.04);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{-webkit-text-size-adjust:100%}
+  body{font-family:'Raleway',system-ui,sans-serif;background:var(--bg);color:var(--ink);line-height:1.5;font-size:15px}
+  button,input,select,textarea{font:inherit;color:inherit}
+  a{color:inherit}
+  [hidden]{display:none!important}
+  .wrap{max-width:1180px;margin:0 auto;padding:0 24px}
+
+  /* Header */
+  header.top{background:var(--ink);color:#fff;position:relative;overflow:hidden}
+  header.top::after{content:"";position:absolute;left:0;right:0;bottom:0;height:3px;background:linear-gradient(90deg,var(--purple),var(--purple-2),var(--purple-3))}
+  .topbar{display:flex;align-items:center;justify-content:space-between;padding:20px 0}
+  .logo-top{height:34px;width:auto;display:block}
+  .logo-icon{height:38px;width:auto;display:block}
+  .tag{font-size:12px;color:#B9B9C0;letter-spacing:.08em;text-transform:uppercase}
+  .hero{padding:26px 0 40px}
+  .eyebrow{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:#B9B9C0;margin-bottom:10px;display:flex;align-items:center;gap:8px}
+  .eyebrow::before{content:"";width:18px;height:2px;background:var(--purple)}
+  .hero h1{font-family:'Expletus Sans',sans-serif;font-weight:600;font-size:clamp(28px,4.4vw,44px);line-height:1.1;letter-spacing:-.01em}
+  .hero p{color:#C9C9CF;margin-top:10px;max-width:640px}
+
+  /* Stats */
+  .stats{display:grid;grid-template-columns:1.3fr repeat(4,1fr);gap:12px;margin-top:-24px;position:relative;z-index:2}
+  .stat{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:16px 18px;box-shadow:var(--shadow);text-align:left;cursor:pointer;transition:border-color .15s}
+  .stat:hover{border-color:#cfcfd5}
+  .stat.active{border-color:var(--ink)}
+  .stat .n{font-family:'Expletus Sans',sans-serif;font-size:28px;font-weight:600;line-height:1}
+  .stat .l{font-size:13px;color:var(--muted);margin-top:6px;display:flex;align-items:center;gap:7px}
+  .dot{width:8px;height:8px;border-radius:50%;flex:none;display:inline-block;background:var(--ink)}
+  .dot.pendente{background:var(--pendente)} .dot.producao{background:var(--producao)} .dot.concluida{background:var(--concluida)} .dot.impressao{background:var(--impressao)}
+  .progress{height:4px;background:var(--line-2);border-radius:4px;margin-top:12px;overflow:hidden}
+  .progress i{display:block;height:100%;background:var(--concluida);border-radius:4px;transition:width .4s}
+
+  /* Tabs */
+  nav.tabs{display:flex;gap:4px;margin:28px 0 20px;border-bottom:1px solid var(--line);overflow-x:auto;scrollbar-width:none}
+  nav.tabs::-webkit-scrollbar{display:none}
+  nav.tabs button{background:none;border:0;padding:12px 16px;font-weight:600;color:var(--muted);cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-1px;white-space:nowrap}
+  nav.tabs button.on{color:var(--ink);border-bottom-color:var(--purple)}
+  nav.tabs button:hover{color:var(--ink)}
+
+  .toolbar{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:16px;flex-wrap:wrap}
+  .filters{display:flex;flex-direction:column;gap:8px}
+  .chips{display:flex;gap:6px;flex-wrap:wrap;align-items:center}
+  .chips .lbl{font-size:12px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;margin-right:4px;min-width:52px}
+  .chip{border:1px solid var(--line);background:var(--surface);border-radius:999px;padding:6px 12px;font-size:13px;font-weight:600;cursor:pointer;display:inline-flex;align-items:center;gap:7px;color:var(--ink-2)}
+  .chip.on{background:var(--ink);color:#fff;border-color:var(--ink)}
+  .btn{border:1px solid var(--line);background:var(--surface);border-radius:10px;padding:8px 14px;font-weight:600;font-size:14px;cursor:pointer;display:inline-flex;align-items:center;gap:8px}
+  .btn:hover{background:var(--hover)}
+  .btn.primary{background:var(--ink);color:#fff;border-color:var(--ink)}
+  .btn.primary:hover{background:#26262a}
+  .btn.ghost{border-color:transparent;background:none}
+  .btn.danger{color:#B91C1C}
+  .icon-btn{width:36px;height:36px;justify-content:center;padding:0}
+  .seg{display:inline-flex;border:1px solid var(--line);border-radius:10px;overflow:hidden;background:var(--surface)}
+  .seg button{border:0;background:none;padding:7px 12px;font-size:13px;font-weight:600;cursor:pointer;color:var(--muted)}
+  .seg button.on{background:var(--ink);color:#fff}
+
+  /* Calendar */
+  .cal{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow)}
+  .cal-head{display:flex;align-items:center;justify-content:space-between;padding:14px 16px;border-bottom:1px solid var(--line)}
+  .cal-head h2{font-family:'Expletus Sans',sans-serif;font-weight:600;font-size:20px;text-transform:capitalize}
+  .cal-grid{display:grid;grid-template-columns:repeat(7,minmax(0,1fr))}
+  .dow{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);padding:10px;border-bottom:1px solid var(--line);font-weight:700}
+  .day{min-height:118px;border-right:1px solid var(--line-2);border-bottom:1px solid var(--line-2);padding:8px;display:flex;flex-direction:column;gap:4px;min-width:0;transition:background .1s}
+  .day:nth-child(7n){border-right:0}
+  .day.out{background:#FCFCFD}
+  .day.out .num{color:#C4C4CA}
+  .day.drop{background:var(--purple-soft);outline:2px dashed var(--purple);outline-offset:-3px}
+  .num{font-size:13px;font-weight:600;color:var(--ink-2);width:26px;height:26px;display:grid;place-items:center;border-radius:50%}
+  .day.today .num{background:var(--purple);color:#fff}
+  .evs{display:flex;flex-direction:column;gap:4px;min-width:0}
+  .ev{display:flex;align-items:center;gap:5px;width:100%;text-align:left;font-size:12px;font-weight:600;padding:4px 7px;border-radius:6px;cursor:pointer;border:1px solid;white-space:nowrap;overflow:hidden;background:none;min-width:0}
+  .ev span{overflow:hidden;text-overflow:ellipsis}
+  .ev .mode{font-size:9.5px;font-weight:800;letter-spacing:.04em;opacity:.75;flex:none}
+  .ev.pendente,.pill.pendente{background:var(--pendente-bg);color:var(--pendente);border-color:var(--pendente-line)}
+  .ev.producao,.pill.producao{background:var(--producao-bg);color:var(--producao);border-color:var(--producao-line)}
+  .ev.concluida,.pill.concluida{background:var(--concluida-bg);color:var(--concluida);border-color:var(--concluida-line)}
+  .ev.impressao,.pill.impressao{background:var(--impressao-bg);color:var(--impressao);border-color:var(--impressao-line)}
+  body.editing .ev[draggable=true]{cursor:grab}
+  .more{font-size:11px;color:var(--muted);font-weight:600;background:none;border:0;text-align:left;cursor:pointer;padding:0 4px}
+
+  .undated{margin-top:16px;background:var(--surface);border:1px dashed #D5D5DA;border-radius:var(--radius);padding:14px 16px}
+  .undated.drop{background:var(--purple-soft);border-color:var(--purple)}
+  .undated-h{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:10px;flex-wrap:wrap}
+  .undated-h b{font-family:'Expletus Sans',sans-serif;font-weight:600}
+  .undated .evs{flex-direction:row;flex-wrap:wrap;gap:6px}
+  .undated .ev{width:auto;max-width:100%}
+
+  /* Cards */
+  .group-title{font-family:'Expletus Sans',sans-serif;font-weight:600;font-size:15px;margin:24px 0 10px;color:var(--ink-2);display:flex;align-items:center;gap:10px}
+  .group-title .letter{width:24px;height:24px;border-radius:7px;background:var(--ink);color:#fff;display:grid;place-items:center;font-size:12px;flex:none}
+  .group-title small{font-family:Raleway;font-weight:600;color:var(--muted);font-size:12.5px}
+  .group-title::after{content:"";flex:1;height:1px;background:var(--line)}
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:12px}
+  .card{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:16px;display:flex;flex-direction:column;gap:10px;cursor:pointer;transition:transform .15s,box-shadow .15s;position:relative;overflow:hidden;text-align:left}
+  .card:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(15,15,16,.07)}
+  .card::before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--line)}
+  .card.pendente::before{background:var(--pendente)} .card.producao::before{background:var(--producao)} .card.concluida::before{background:var(--concluida)} .card.impressao::before{background:var(--impressao)}
+  .card-top{display:flex;justify-content:space-between;align-items:flex-start;gap:8px}
+  .card-top > div:first-child{display:flex;flex-direction:column;align-items:flex-start;gap:8px;min-width:0}
+  .date-box{text-align:center;min-width:46px;border:1px solid var(--line);border-radius:10px;padding:4px 6px;line-height:1.1;flex:none}
+  .date-box b{display:block;font-family:'Expletus Sans',sans-serif;font-size:20px}
+  .date-box span{font-size:10px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);font-weight:700}
+  .date-box.tbd{border-style:dashed;color:var(--muted);font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;padding:8px 6px}
+  .card h3{font-size:16px;font-weight:700;line-height:1.3}
+  .meta{font-size:13px;color:var(--muted);display:flex;gap:6px;flex-wrap:wrap;align-items:center}
+  .pill{font-size:11.5px;font-weight:700;padding:3px 9px;border-radius:999px;display:inline-flex;align-items:center;gap:6px;white-space:nowrap;border:0}
+  .type{font-size:11.5px;font-weight:700;padding:3px 9px;border-radius:999px;background:var(--line-2);color:var(--ink-2)}
+  .mode-tag{font-size:11px;font-weight:800;padding:3px 9px;border-radius:999px;border:1px solid var(--line);color:var(--ink-2);letter-spacing:.04em;text-transform:uppercase;display:inline-flex;align-items:center;gap:5px}
+  .mode-tag svg{width:12px;height:12px}
+  .card .note{font-size:13px;color:var(--ink-2);display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+  .card .link{font-size:13px;font-weight:700;color:var(--concluida);text-decoration:none;display:inline-flex;align-items:center;gap:6px;margin-top:auto}
+  .card.impressao .link{color:var(--impressao)}
+  .card .link:hover{text-decoration:underline}
+  .empty{padding:40px 20px;text-align:center;color:var(--muted);background:var(--surface);border:1px dashed var(--line);border-radius:var(--radius)}
+
+  /* Links */
+  .links-cat{margin-bottom:22px}
+  .link-row{display:flex;align-items:center;gap:14px;padding:14px 16px;background:var(--surface);border:1px solid var(--line);border-radius:12px;margin-bottom:8px;text-decoration:none;transition:border-color .15s}
+  .link-row:hover{border-color:var(--purple)}
+  .link-ic{width:38px;height:38px;border-radius:10px;background:var(--purple-soft);color:var(--purple);display:grid;place-items:center;flex:none}
+  .link-ic svg{width:18px;height:18px}
+  .link-main{flex:1;min-width:0}
+  .link-main b{display:block;font-weight:700}
+  .link-main small{display:block;color:var(--muted);font-size:12.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+
+  /* Modal */
+  .overlay{position:fixed;inset:0;background:rgba(15,15,16,.45);display:none;align-items:flex-end;justify-content:center;z-index:50}
+  .overlay.open{display:flex}
+  @media(min-width:640px){.overlay{align-items:center;padding:24px}}
+  .modal{background:var(--surface);width:100%;max-width:540px;border-radius:18px 18px 0 0;max-height:92vh;overflow:auto;box-shadow:0 20px 60px rgba(0,0,0,.25)}
+  @media(min-width:640px){.modal{border-radius:18px}}
+  .modal-h{padding:20px 22px 0;display:flex;justify-content:space-between;align-items:flex-start;gap:12px}
+  .modal-h > div{display:flex;flex-direction:column;align-items:flex-start;gap:10px}
+  .modal-h h3{font-family:'Expletus Sans',sans-serif;font-weight:600;font-size:21px;line-height:1.2}
+  .modal-b{padding:16px 22px 22px;display:flex;flex-direction:column;gap:14px}
+  .modal-f{padding:0 22px 22px;display:flex;gap:8px;justify-content:flex-end}
+  .kv{display:grid;grid-template-columns:110px 1fr;gap:8px 12px;font-size:14px}
+  .kv dt{color:var(--muted)}
+  .kv dd{font-weight:600}
+  label.f,.f{display:flex;flex-direction:column;gap:6px;font-size:13px;font-weight:600;color:var(--ink-2)}
+  .f input,.f select,.f textarea{border:1px solid var(--line);border-radius:10px;padding:10px 12px;background:#fff;font-weight:500;font-size:15px;width:100%}
+  .f input:focus,.f select:focus,.f textarea:focus{outline:2px solid var(--purple-soft);border-color:var(--purple)}
+  .row2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  .pick{display:grid;gap:6px}
+  .pick.c2{grid-template-columns:repeat(2,1fr)}
+  .pick label{border:1px solid var(--line);border-radius:10px;padding:9px 8px;font-size:13px;font-weight:700;display:flex;align-items:center;gap:7px;cursor:pointer;justify-content:center;text-align:center}
+  .pick input{position:absolute;opacity:0;pointer-events:none}
+  .pick label:has(input:checked){border-color:var(--ink);background:var(--hover)}
+  .pick label.disabled{opacity:.35;cursor:not-allowed}
+  .inline-check{display:flex;align-items:center;gap:8px;font-size:13px;font-weight:600;color:var(--ink-2)}
+  .cta-link{display:flex;align-items:center;justify-content:center;gap:8px;color:#fff;text-decoration:none;font-weight:700;padding:12px;border-radius:10px;background:var(--concluida)}
+  .cta-link.impressao{background:var(--impressao)}
+  .hint{font-size:12px;color:var(--muted);font-weight:500}
+
+  /* Edit mode */
+  .edit-only{display:none!important}
+  body.editing .edit-only{display:inline-flex!important}
+  body.editing .edit-block{display:block!important}
+  .edit-block{display:none!important}
+  .editbar{display:none;background:var(--purple-soft);color:var(--purple);font-size:13px;font-weight:700;padding:8px 16px;text-align:center}
+  body.editing .editbar{display:block}
+
+  footer{margin:56px 0 32px;padding-top:20px;border-top:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;color:var(--muted);font-size:13px}
+  .logo-foot{height:30px;width:auto;display:block}
+  .legend{display:flex;gap:14px;flex-wrap:wrap;font-size:13px;color:var(--ink-2);font-weight:600}
+  .legend span{display:inline-flex;align-items:center;gap:6px}
+
+  .toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%) translateY(20px);background:var(--ink);color:#fff;padding:10px 16px;border-radius:10px;font-size:14px;font-weight:600;opacity:0;transition:.25s;z-index:60;pointer-events:none}
+  .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+
+  .day-list{margin-top:14px;display:none}
+  @media(max-width:860px){ .stats{grid-template-columns:repeat(2,1fr)} .stats .stat:first-child{grid-column:1/-1} }
+  @media(max-width:760px){
+    .wrap{padding:0 16px}
+    .logo-top{height:28px}
+    .logo-icon{height:32px}
+    .tag{display:none}
+    nav.tabs button{padding:12px 10px}
+    .stat{padding:14px}
+    .day{min-height:60px;padding:4px;align-items:center;cursor:pointer}
+    .day.sel{background:var(--purple-soft)}
+    .dow{padding:8px 0;text-align:center;font-size:10px;letter-spacing:.04em}
+    .cal-grid .evs{flex-direction:row;flex-wrap:wrap;gap:3px;justify-content:center}
+    .cal-grid .ev{font-size:0;padding:0;width:8px;height:8px;border-radius:50%;border:0}
+    .cal-grid .ev.pendente{background:var(--pendente)} .cal-grid .ev.producao{background:var(--producao)} .cal-grid .ev.concluida{background:var(--concluida)} .cal-grid .ev.impressao{background:var(--impressao)}
+    .cal-grid .ev .mode{display:none}
+    .more{display:none}
+    .row2{grid-template-columns:1fr}
+    .kv{grid-template-columns:90px 1fr}
+    .day-list{display:block}
+    .undated{display:none}
+  }
+</style>
+</head>
+<body>
+
+<div class="editbar">Modo equipe ativo — arraste as peças no calendário para mudar a data, ou clique para editar.</div>
+
+<header class="top">
+  <div class="wrap">
+    <div class="topbar">
+      <span style="display:flex;align-items:center;gap:10px"><img class="logo-icon" src="/megali-icone.png" alt=""><img class="logo-top" src="/megali-logo-branco.png" alt="Megali Hub"></span>
+      <span class="tag">Painel do cliente</span>
+    </div>
+    <div class="hero">
+      <div class="eyebrow">Barbacena · MG</div>
+      <h1>Quintas da Mantiqueira</h1>
+      <p>Cronograma de todas as peças do lançamento — o que está aguardando informação, o que está em produção e o que já foi entregue.</p>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+  <section class="stats" id="stats"></section>
+
+  <nav class="tabs" role="tablist">
+    <button data-tab="calendario" class="on" role="tab">Calendário</button>
+    <button data-tab="cards" role="tab">Peças</button>
+    <button data-tab="links" role="tab">Links importantes</button>
+  </nav>
+
+  <!-- Calendário -->
+  <section data-panel="calendario">
+    <div class="toolbar">
+      <div class="legend" id="legend"></div>
+      <button class="btn primary edit-only" data-add-piece>+ Nova peça</button>
+    </div>
+    <div class="cal">
+      <div class="cal-head">
+        <button class="btn icon-btn" id="prev" aria-label="Mês anterior">‹</button>
+        <h2 id="monthLabel"></h2>
+        <button class="btn icon-btn" id="next" aria-label="Próximo mês">›</button>
+      </div>
+      <div class="cal-grid" id="calGrid"></div>
+    </div>
+    <div class="undated" id="undated" data-drop=""></div>
+    <div class="day-list" id="dayList"></div>
+  </section>
+
+  <!-- Cards -->
+  <section data-panel="cards" hidden>
+    <div class="toolbar" style="align-items:flex-start">
+      <div class="filters">
+        <div class="chips" id="statusChips"></div>
+        <div class="chips" id="modeChips"></div>
+      </div>
+      <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">
+        <div class="seg" id="groupSeg">
+          <button data-group="entrega">Por entrega</button>
+          <button data-group="data">Por data</button>
+        </div>
+        <button class="btn primary edit-only" data-add-piece>+ Nova peça</button>
+      </div>
+    </div>
+    <div id="cardsWrap"></div>
+  </section>
+
+  <!-- Links -->
+  <section data-panel="links" hidden>
+    <div class="toolbar">
+      <p class="hint" style="font-size:14px">Materiais, pastas e referências do projeto — atualizados conforme recebemos as informações.</p>
+      <button class="btn primary edit-only" id="addLink">+ Novo link</button>
+    </div>
+    <div id="linksWrap"></div>
+  </section>
+
+  <footer>
+    <img class="logo-foot" src="/megali-logo-preto.png" alt="Megali Hub">
+    <span id="updated"></span>
+    <span style="display:flex;gap:6px;flex-wrap:wrap">
+      <button class="btn ghost edit-only" id="exportBtn">Exportar dados</button>
+      <button class="btn ghost edit-only" id="importBtn">Importar</button>
+      <button class="btn ghost" id="toggleEdit">Modo equipe</button>
+    </span>
+  </footer>
+</main>
+
+<div class="overlay" id="overlay" aria-hidden="true">
+  <div class="modal" role="dialog" aria-modal="true" id="modal"></div>
+</div>
+<input type="file" id="importFile" accept="application/json" hidden>
+<div class="toast" id="toast"></div>
+
+<script type="module" src="/src/painel.js"></script>
+</body>
+</html>
